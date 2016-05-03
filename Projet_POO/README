@@ -1,0 +1,13 @@
+Pour passer au mode test :
+remplacer la premiere ligne de main.php par :
+<?php  require_once 'class/config-test.php'; ?>
+
+Pour passer au mode production :
+remplacer la premiere ligne de main.php par :
+<?php  require_once 'class/config-production.php'; ?>
+
+
+Question additionnelle: est-ce une bonne idée de mettre dans git un fichier pouvant contenir des mots de passe comme config-production.php ?
+
+C'est une très mauvaise idée, car ça fait un endroit critique à gérer en plus. Moins un mot de passe est diffusé, plus il est en sécurité
+Je ne jugerais pas la sécurité des serveurs git...
