@@ -14,8 +14,9 @@
       if(isset($_POST["login_submit"]))
       {
           if($auth->checkUser(htmlentities($_POST["user_name"]),htmlentities($_POST["user_pwd"]))){
-            echo "Bonjour ".htmlentities($_POST["user_name"]);
-			$_SESSION['user'] = $_POST["user_name"];
+              $_SESSION['user'] = $_POST["user_name"];
+              header('Location: ../index.php');
+              exit;
           }
           else{
             echo("Nom d'utilisateur ou mot de passe non valide");
@@ -27,8 +28,8 @@
       elseif(isset($_POST["new_user"])){
 
           if($auth->addUser(htmlentities($_POST["user_name"]),htmlentities($_POST["user_pwd"]))){
-              echo "Bienvenue nouvel utilisateur ".htmlentities($_POST["user_name"]);
-			  $_SESSION['user'] = $_POST["user_name"];
+			  echo '<p>Utilisateur créé</p>';
+              echo '<p><a href="../index.php">Index</a></p>';
           }
           else{
               echo("Pas accepté parmi nous");

@@ -5,6 +5,7 @@
  * Date: 03.05.2016
  * Time: 18:39
  */
+session_start();
 
 ?>
 
@@ -60,11 +61,19 @@
 <body>
 <h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
 <div id="haut">
-    <a href="">Inscription</a>
-    <a href="">Connection</a>
+    <?php
+    if(isset($_SESSION['user'])) {
+        echo '<a href="">'.$_SESSION['user'].' '.'</a>';
+        echo '<a href="admin/disconnect.php">Deconnexion </a>';
+    }else {
+        echo '<a href = "admin/login.php" > Connexion</a >';
+        echo '<a href="admin/login.php">Inscription</a>';
+    }
+    ?>
+
     <a href="">Rechercher un quizz</a>
     <a href="">Création de questionnaire</a>
-    <a href="">Gérer son compte</a>
+
 </div>
 <div id="Global">
     <div id="droite">
