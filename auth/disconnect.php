@@ -14,6 +14,4 @@ session_destroy();
 
 header('Location: ../index.php');
 
-
-//Quelque chose à ajouter pour arrêter le script ?
 ?>

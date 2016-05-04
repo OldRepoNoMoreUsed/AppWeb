@@ -24,13 +24,11 @@ class Auth_DB extends Auth_Abstract{
             return false;
         }
         else{
-            $_SESSION['user'] = $result->fetchColumn(1);
-            $_SESSION['ID_User'] = $result->fetchColumn(1);
+            $user = $result->fetch();
+            $_SESSION['user'] = $user['username'];
+            $_SESSION['ID_User'] = $user['ID_User'];
 
-
-            echo $_SESSION['user'];
-            echo $_SESSION['ID_User'];
-            //header('Location: ../index.php');
+            header('Location: ../index.php');
             exit;
         }
     }

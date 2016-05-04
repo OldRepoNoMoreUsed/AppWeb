@@ -64,15 +64,16 @@ session_start();
     <?php
     if(isset($_SESSION['user'])) {
         echo '<a href="">'.$_SESSION['user'].' '.'</a>';
-        echo '<a href="admin/disconnect.php">Deconnexion </a>';
+        echo '<a href="auth/disconnect.php">Deconnexion </a>';
+        echo '<a href="questionnary/insert-list.php">Création de questionnaire</a>';
     }else {
-        echo '<a href = "admin/login.php" > Connexion</a >';
-        echo '<a href="admin/login.php">Inscription</a>';
+        echo '<a href = "auth/login.php" > Connexion</a >';
+        echo '<a href="auth/login.php">Inscription</a>';
     }
     ?>
 
     <a href="">Rechercher un quizz</a>
-    <a href="">Création de questionnaire</a>
+
 
 </div>
 <div id="Global">
