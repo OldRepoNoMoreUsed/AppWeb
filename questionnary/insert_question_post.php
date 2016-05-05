@@ -25,8 +25,8 @@ try{
 }
 
 // Insertion du message à l'aide d'une requête préparée
-$req = $pdo->prepare('INSERT INTO tb_question (Question, Answer) VALUES(?, ?)');
-$req->execute(array($_POST['question'], $_POST['answer']));
+$quest = $pdo->prepare('INSERT INTO tb_question (Question, Answer) VALUES(?, ?)');
+$quest->execute(array($_POST['question'], $_POST['answer']));
 
 
 header('Location: insert_question.php');

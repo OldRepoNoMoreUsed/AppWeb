@@ -10,9 +10,9 @@
     <script src="script.js"></script>
 </head>
 <body>
-	
+	<form action="insert-list-post.php" method="post">
 	<p>
-		<form action="insert-list-post.php" method="post">
+
 		<label for = "list_name">Nom de la liste </label>
 		<input type = "text" name = "list_name" id = "list_name"/>
 	</p>
