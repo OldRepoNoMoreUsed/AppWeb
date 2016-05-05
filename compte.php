@@ -77,7 +77,7 @@ if (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $co
     </style>
 </head>
 <body>
-<h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
+<h1 id="titreAccueil">SandBoxLearn</h1>
 <div id="haut">
     <a href="index.php">Page d'accueil</a>
     <a href="auth/disconnect.php">Deconnexion </a>
@@ -106,7 +106,7 @@ if (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $co
                     foreach($colonnes as $c) {
                         echo "<th>";
                         echo action_links($base_url, "tri", $c, $c);
-                        echo "<th>";
+                        echo "</th>";
                     }
                 ?>
                 <th>Description</th>
@@ -118,7 +118,7 @@ if (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $co
                     while($row = $question_list->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>"
                             .balisage(array_map("htmlentities", $row))
-                            ."<td>".action_links($base_url, "start", $row['ID_list'], "Start")."</td>"
+                            ."<td width=\"30\">".action_links($base_url, "start", $row['ID_list'], "Start")."</td>"
                             ."<td>".action_links($base_url, "del", $row['ID_list'], "X")."</td>"
                             ."</tr>";
                     }
