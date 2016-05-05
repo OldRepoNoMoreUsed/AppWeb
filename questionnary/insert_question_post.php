@@ -24,10 +24,20 @@ try{
     die('Erreur : '.$e->getMessage());
 }
 
-// Insertion du message à l'aide d'une requête préparée
+
+//Transaction ?
+// Insertion de la question à l'aide d'une requête préparée
 $quest = $pdo->prepare('INSERT INTO tb_question (Question, Answer) VALUES(?, ?)');
 $quest->execute(array($_POST['question'], $_POST['answer']));
+$id = $pdo->lastInsertId();
+//Ajout de la question dans la liste
+$list = $pdo->prepare('INSERT INTO tb_list_question (list_ID_list, question_ID_question) VALUES(?, ?)');
+$list->execute(array($_POST['list'], $id));
+
+echo $_POST['list'];
+
+echo $id;
 
 
-header('Location: insert_question.php');
+//header('Location: insert_question.php');
 ?>
