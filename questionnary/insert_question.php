@@ -60,7 +60,6 @@ if(!isset($_SESSION['user'])){
                 echo '<option value="error">Veuillez créer une liste</option>';
             }else{
                 while($donnees = $list->fetch()){
-                    echo '<option value="1">sdfghjk</option>';
                     echo '<option value="'.$donnees['ID_list'].'">'.$donnees['list_name'].'</option>';
                 }
             }

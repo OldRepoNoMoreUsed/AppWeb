@@ -27,13 +27,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `tb_list` (
-  `ID_list` int(11) NOT NULL,
+  `ID_list` int(11) NOT NULL  AUTO_INCREMENT,
   `list_name` varchar(45) NOT NULL,
   `list_description` text,
   `list_commentary` text,
   `list_difficulty` int(11) DEFAULT NULL,
   `list_owner_user` int(11) NOT NULL,
-  PRIMARY KEY (`ID_list`,`list_owner_user`),
+  PRIMARY KEY (`ID_list`),
   KEY `fk_list_user1_idx` (`list_owner_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

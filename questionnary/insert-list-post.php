@@ -1,5 +1,5 @@
 ﻿<?php 
-require_once 'config-db.php';
+require_once '../admin/config-db.php';
 
 session_start();
 

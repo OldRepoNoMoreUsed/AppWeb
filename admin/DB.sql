@@ -27,7 +27,7 @@ USE `SandBoxLearn` ;
 DROP TABLE IF EXISTS `SandBoxLearn`.`tb_list` ;
 
 CREATE TABLE IF NOT EXISTS `SandBoxLearn`.`tb_list` (
-  `ID_list` INT NOT NULL,
+  `ID_list` INT NOT NULL AUTO_INCREMENT;
   `list_name` VARCHAR(45) NOT NULL,
   `list_description` TEXT(200) NULL,
   `list_commentary` TEXT(200) NULL,
