@@ -109,7 +109,7 @@ session_start();
       </div>
 
       <div id="centre">
-          <h2>Veuillez vous connecter</h2>
+          <h2 align="center">Veuillez vous connecter</h2>
           <?php //Fonction qui afficher le formulaire, param -> valeur par défaut pour l'utilisateur
           function form_auth($user_name=""){
               ?>
