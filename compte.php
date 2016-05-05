@@ -2,10 +2,28 @@
 /**
  * Created by PhpStorm.
  * User: Nicolas
- * Date: 03.05.2016
- * Time: 18:39
+ * Date: 05.05.2016
+ * Time: 11:41
  */
-session_start();
+require_once 'admin/config-db.php';
+require_once 'function_compte.php';
+
+$base_url = $_SERVER['PHP_SELF'];
+
+$colonnes = array("ID", "Nom");
+
+try{
+    $db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
+}catch(Exception $e)
+{
+    die('Erreur:'.$e->getMessage());
+}
+
+if (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
+    $tri = $_GET['tri'];
+} else {
+    $tri = "id";
+}
 
 ?>
 
@@ -61,20 +79,10 @@ session_start();
 <body>
 <h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
 <div id="haut">
-    <?php
-    if(isset($_SESSION['user'])) {
-        echo '<a href="Compte.php">'.$_SESSION['user'].' '.'</a>';
-        echo '<a href="auth/disconnect.php">Deconnexion </a>';
-        echo '<a href="questionnary/insert-list.php">Création de questionnaire </a>';
-    }else {
-        echo '<a href = "auth/login.php" >Connexion </a >';
-        echo '<a href="auth/login.php">Inscription </a>';
-    }
-    ?>
-
+    <a href="index.php">Page d'accueil</a>
+    <a href="auth/disconnect.php">Deconnexion </a>
+    <a href="questionnary/insert-list.php">Création de questionnaire </a>
     <a href="">Rechercher un quizz</a>
-
-
 </div>
 <div id="Global">
     <div id="droite">
@@ -88,8 +96,35 @@ session_start();
     </div>
     <div id="centre">
 
-        <h2>Qu'est ce que SandBoxLearn</h2>
-        <p>SandBoxLearn est une application sur le web permettant l'apprentissage via des questionnaires que chaque utilisateur peut créer selon ses envies.</p>
+        <h2>Mon compte</h2>
+        <p><a href="questionnary/insert-list.php">Ajouter un questionnaire</a></p>
+
+        <h2>Liste des questionnaires lié a ce compte</h2>
+        <table border="1">
+            <tr>
+                <?php
+                    foreach($colonnes as $c) {
+                        echo "<th>";
+                        echo action_links($base_url, "tri", $c, $c);
+                        echo "<th>";
+                    }
+                ?>
+                <th>Description</th>
+                <th>Commencer</th>
+                <th>Supprimer</th>
+            </tr>
+            <?php
+                if($question_list = get_question($tri)){
+                    while($row = $question_list->fetch(PDO::FETCH_ASSOC)){
+                        echo "<tr>"
+                            .balisage(array_map("htmlentities", $row))
+                            ."<td>".action_links($base_url, "start", $row['ID_list'], "Start")."</td>"
+                            ."<td>".action_links($base_url, "del", $row['ID_list'], "X")."</td>"
+                            ."</tr>";
+                    }
+                }
+            ?>
+        </table>
     </div>
     <div id="gauche">
         <h2>Baniere gauche</h2>

@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: Nicolas
- * Date: 03.05.2016
- * Time: 18:39
+ * Date: 05.05.2016
+ * Time: 11:56
  */
-session_start();
 
 ?>
 
@@ -61,20 +60,10 @@ session_start();
 <body>
 <h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
 <div id="haut">
-    <?php
-    if(isset($_SESSION['user'])) {
-        echo '<a href="Compte.php">'.$_SESSION['user'].' '.'</a>';
-        echo '<a href="auth/disconnect.php">Deconnexion </a>';
-        echo '<a href="questionnary/insert-list.php">Création de questionnaire </a>';
-    }else {
-        echo '<a href = "auth/login.php" >Connexion </a >';
-        echo '<a href="auth/login.php">Inscription </a>';
-    }
-    ?>
-
-    <a href="">Rechercher un quizz</a>
-
-
+    <a href="index.php">Page d'accueil</a>
+    <a href="auth/disconnect.php">Deconnexion </a>
+    <a href="questionnary/insert-list.php">Création de questionnaire </a>
+    <a href="">Rechercher un questionnaire</a>
 </div>
 <div id="Global">
     <div id="droite">
@@ -88,8 +77,9 @@ session_start();
     </div>
     <div id="centre">
 
-        <h2>Qu'est ce que SandBoxLearn</h2>
-        <p>SandBoxLearn est une application sur le web permettant l'apprentissage via des questionnaires que chaque utilisateur peut créer selon ses envies.</p>
+        <h2>Supprimer un questionnaire</h2>
+        <p>Vous trouverez ci-dessous la liste de tout vos questionnaires cliquez sur la croix pour supprimer celui que vous desirez supprimer</p>
+        /*TODO : Insertion d'un tableau contenant le nom et la description des questionnaire a supprimer et un colonne avec une croix pour la suppression*/
     </div>
     <div id="gauche">
         <h2>Baniere gauche</h2>
