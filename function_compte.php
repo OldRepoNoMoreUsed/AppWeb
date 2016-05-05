@@ -23,4 +23,21 @@ function balisage ($liste, $b = "td") {
     return join("", array_map($callback, $liste));
 }
 
+function remove_list($id){
+    echo "On delete un élément";
+    /*global $db;
+    $val = intval($id);
+    $sql_query = "";
+    $db->query($sql_query);*/
+}
+
+function start_list($id){
+    echo "On lance une session d entrainement avec la liste: ". $id;
+}
+
+function redirect($url){
+    header("Location: $url");
+    exit();
+}
+
 ?>

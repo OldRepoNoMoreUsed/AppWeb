@@ -19,11 +19,18 @@ try{
     die('Erreur:'.$e->getMessage());
 }
 
-if (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
+if(isset($_GET['del']) && is_scalar($_GET['del']) && is_numeric($_GET['del'])){
+    remove_list($_GET['del']);
+    redirect($base_url);
+}elseif (isset($_GET['start']) && is_scalar($_GET['start']) && is_numeric($_GET['start'])){
+    start_list($_GET['start']);
+}
+elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
     $tri = $_GET['tri'];
 } else {
-    $tri = "id";
+    $tri = "ID";
 }
+
 
 ?>
 
