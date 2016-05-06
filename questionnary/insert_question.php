@@ -64,11 +64,9 @@ if(!isset($_SESSION['user'])){
                 }
             }
             echo '</p>';
-        } else{
-            echo '<input type="hidden" name="list" id="list" value="'.$_GET['ID_list'].'/>';
+        } else {
+            echo '<p><input type="hidden" name="list" id="list" value="' . $_GET['ID_list'] . '"/></p>';
         }
-
-
         ?>
 
         <p>
@@ -78,9 +76,13 @@ if(!isset($_SESSION['user'])){
 
 <?php
 
-
+if(isset($_GET['ID_list'])) {
 //Question déjà existantes
-$reponse = $pdo->query('SELECT * FROM tb_question ORDER BY ID_Question DESC');
+    $reponse = $pdo->query('SELECT Question, Answer FROM tb_question, tb_list_question, tb_list WHERE ID_list=' . $_GET['ID_list'] . ' AND ID_list=list_ID_list AND question_ID_question = ID_question ORDER BY ID_Question DESC ');
+}else{
+    $reponse = $pdo->query('SELECT Question, Answer, list_name FROM tb_question, tb_list_question, tb_list WHERE ID_list=list_ID_list AND question_ID_question = ID_question ORDER BY ID_Question DESC ');
+}
+
 
 echo '<table>';
 while ($donnees = $reponse->fetch())
@@ -88,6 +90,9 @@ while ($donnees = $reponse->fetch())
     echo '<tr>';
     echo '<td>'.htmlentities($donnees['Question']).'</td>';
     echo '<td>'.htmlentities($donnees['Answer']).'</td>';
+    if(!isset($_GET['ID_list'])) {echo '<td>'.htmlentities($donnees['list_name']).'</td>';}
+    echo '<td><a href="">Modifier(a faire)</a></td>';
+    echo '<td><a href="">Supprimer(a faire)</a></td>';
     echo '</tr>';
 }
 echo '</table>';
