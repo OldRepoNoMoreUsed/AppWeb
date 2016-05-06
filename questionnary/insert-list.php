@@ -53,7 +53,7 @@
 	</style>
 </head>
 	<body>
-		<h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
+		<h1 id="titreAccueil">Ajouter des listes de questions</h1>
 		<div id="haut">
 			<?php
 			if(isset($_SESSION['user'])) {
