@@ -14,12 +14,27 @@ if(!isset($_SESSION['user'])){
 	header('Location: ../auth/login.php');
 	exit;
 }
+
+if(isset($_GET['id'])){
+	//TODO chargement de toute les questions dont l id de la liste est passe par le $_GET
+	echo "Nous allons nous servir du questionnaire dont l id est:".$_GET['id'];
+	$sql_query = 'SELECT question_ID_question FROM tb_list_question WHERE list_ID_List = '.$_GET['id'];
+	$listIDquestion = $pdo->query($sql_query);
+	$listID = array();
+	while($ID = $listIDquestion->fetch()){
+		array_push($listID, $ID);
+	}
+	print_r($listID);
+
+}else{
+	header("Location: ../index.php");
+}
 ?>
 <!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Titre de la page</title>
+    <title>Questionneur</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>

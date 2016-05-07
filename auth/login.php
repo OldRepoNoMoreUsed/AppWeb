@@ -21,7 +21,7 @@ session_start();
       elseif(isset($_POST["new_user"])){
           if($auth->addUser(htmlentities($_POST["user_name"]),htmlentities($_POST["user_pwd"]))){
               echo '<p>Utilisateur créé</p>';
-              echo '<p><a href="../index.php">Index</a></p>';
+              header('Location: ../index.php');
           }
           else{
               echo("Pas accepté parmi nous");

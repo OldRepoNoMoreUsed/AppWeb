@@ -125,7 +125,7 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
                     while($row = $question_list->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>"
                             .balisage(array_map("htmlentities", $row))
-                            ."<td width=\"30\">".action_links($base_url, "start", $row['ID_list'], "Start")."</td>"
+                            ."<td>".action_links($base_url, "start", $row['ID_list'], "Start")."</td>"
                             ."<td>".action_links($base_url, "del", $row['ID_list'], "X")."</td>"
                             ."</tr>";
                     }
