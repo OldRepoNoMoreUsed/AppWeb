@@ -1,5 +1,19 @@
 <?php
-	session_start();
+
+require_once '../admin/config-db.php';
+session_start();
+
+// Connexion à la base de données
+try{
+	$pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
+} catch(Exception $e){
+	die('Erreur : '.$e->getMessage());
+}
+
+if(!isset($_SESSION['user'])){
+	header('Location: ../auth/login.php');
+	exit;
+}
 ?>
 <!doctype html>
 <html lang="fr">

@@ -19,8 +19,6 @@ session_start();
           }
       }
       elseif(isset($_POST["new_user"])){
-          echo "poil";
-
           if($auth->addUser(htmlentities($_POST["user_name"]),htmlentities($_POST["user_pwd"]))){
               echo '<p>Utilisateur créé</p>';
               echo '<p><a href="../index.php">Index</a></p>';

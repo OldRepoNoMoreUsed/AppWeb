@@ -34,5 +34,5 @@ $id = $pdo->lastInsertId();
 $list = $pdo->prepare('INSERT INTO tb_list_question (list_ID_list, question_ID_question) VALUES(?, ?)');
 $list->execute(array($_POST['list'], $id));
 
-header('Location: insert_question.php');
+header('Location: insert_question.php?ID_list='.$_POST['list']);
 ?>
