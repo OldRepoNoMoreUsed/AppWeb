@@ -7,6 +7,7 @@
  */
 require_once 'admin/config-db.php';
 require_once 'function_compte.php';
+session_start();
 
 $base_url = $_SERVER['PHP_SELF'];
 
