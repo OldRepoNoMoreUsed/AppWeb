@@ -75,7 +75,7 @@ if(!isset($_SESSION['user'])){
         }
     </style>
     <body>
-    <h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
+    <h1 id="titreAccueil">Ajouter des questions à vos listes</h1>
     <div id="haut">
         <?php
         if(isset($_SESSION['user'])) {

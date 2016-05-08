@@ -12,7 +12,13 @@ function action_links ($url, $action, $element, $contenu) {
 
 function get_question($tri) {
     global $db; // variable permettant l'accès à la base
-    $sql_query = "SELECT ID_list, list_name, list_description FROM tb_list ORDER BY ".$db->quote($tri)." ASC";
+    echo "Questionnaire lié à l'utilisateur: ".$_SESSION['user'];
+
+    $sql_query = 'SELECT ID_list, list_name, list_description
+                 FROM tb_list, tb_user 
+                 WHERE tb_user.ID_User = tb_list.list_owner_user AND tb_user.username = "'. $_SESSION['user'].'"
+                 ORDER BY '.$db->quote($tri).' ASC';
+
     return $db->query($sql_query);
 }
 
@@ -33,6 +39,7 @@ function remove_list($id){
 
 function start_list($id){
     echo "On lance une session d entrainement avec la liste: ". $id;
+    header("Location: workout/question.php?id=".$id);
 }
 
 function redirect($url){
