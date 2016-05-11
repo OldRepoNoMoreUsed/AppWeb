@@ -59,6 +59,9 @@ function requete($pdo){
     <script src="script.js"></script>
 </head>
 <body>
+<div id="haut">
+	<?php require_once('../bar/menu.php') ?>
+</div>
 
 </body>
 </html>
