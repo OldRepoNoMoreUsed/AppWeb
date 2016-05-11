@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.1.4
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 05 Mai 2016 à 13:05
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Généré le :  Mer 11 Mai 2016 à 08:41
+-- Version du serveur :  5.6.15-log
+-- Version de PHP :  5.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `tb_list` (
-  `ID_list` int(11) NOT NULL  AUTO_INCREMENT,
+  `ID_list` int(11) NOT NULL AUTO_INCREMENT,
   `list_name` varchar(45) NOT NULL,
   `list_description` text,
   `list_commentary` text,
@@ -35,15 +35,19 @@ CREATE TABLE IF NOT EXISTS `tb_list` (
   `list_owner_user` int(11) NOT NULL,
   PRIMARY KEY (`ID_list`),
   KEY `fk_list_user1_idx` (`list_owner_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `tb_list`
 --
 
 INSERT INTO `tb_list` (`ID_list`, `list_name`, `list_description`, `list_commentary`, `list_difficulty`, `list_owner_user`) VALUES
-(0, 'jeanclaudeliste', 'listedejeanclaude', 'c''est la liste de jeanclaude', 0, 1),
-(0, 'listedemicheline', 'micheline micheline', 'C''est la liste de michou', 0, 2);
+(2, 'Math', 'Question de math', 'C est facile de creer un questionnaire', 0, 4),
+(3, 'Fancais', 'Question de francais', 'C est facile', 0, 4),
+(4, 'Math', 'Truc', 'C est des math', 0, 5),
+(5, 'Allemand', 'Questionnaire d''allemand', 'C est dur l''allemand', 0, 9),
+(6, 'Math', 'Math', 'Math', 0, 10),
+(7, 'Questionnaire info', 'Informatique', 'truc', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -58,6 +62,25 @@ CREATE TABLE IF NOT EXISTS `tb_list_question` (
   KEY `fk_list_has_Question_Question1_idx` (`question_ID_question`),
   KEY `fk_list_has_Question_list1_idx` (`list_ID_list`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `tb_list_question`
+--
+
+INSERT INTO `tb_list_question` (`list_ID_list`, `question_ID_question`) VALUES
+(2, 12),
+(2, 13),
+(2, 14),
+(3, 15),
+(4, 16),
+(4, 17),
+(5, 18),
+(6, 19),
+(6, 20),
+(7, 21),
+(7, 22),
+(4, 23),
+(4, 24);
 
 -- --------------------------------------------------------
 
@@ -114,22 +137,26 @@ CREATE TABLE IF NOT EXISTS `tb_question` (
   `Question` varchar(140) NOT NULL,
   `Answer` varchar(140) NOT NULL,
   PRIMARY KEY (`ID_Question`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- Contenu de la table `tb_question`
 --
 
 INSERT INTO `tb_question` (`ID_Question`, `Question`, `Answer`) VALUES
-(1, 'micheline ?', 'micheline'),
-(2, 'micheline ?', 'micheline'),
-(3, 'alala ?', 'alala'),
-(4, 'alala ?', 'alala'),
-(5, 'mot ?', 'mot'),
-(6, 'ralph ? ', 'ralph'),
-(7, 'as', 'as'),
-(8, 'as', 'ass'),
-(9, 'as', 'ass');
+(12, '1+1', '2'),
+(13, '2+2', '4'),
+(14, '3+3', '6'),
+(15, 'Comment ecrire: Salut ? ', 'Salut'),
+(16, '1+1', '2'),
+(17, '2+2', '4'),
+(18, 'Le chien ', 'Hund'),
+(19, '1+1', '2'),
+(20, '2+2', '4'),
+(21, 'Coucou', 'Poil'),
+(22, 'Coucou', 'Poil'),
+(23, '', ''),
+(24, '2+3', '5');
 
 -- --------------------------------------------------------
 
@@ -155,16 +182,19 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`ID_User`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Contenu de la table `tb_user`
 --
 
 INSERT INTO `tb_user` (`ID_User`, `username`, `password`) VALUES
-(1, 'jeanclaude', 'bd38569543fcf364ab330953b538a1bbaa28318c'),
-(2, 'micheline', 'cead3d9a75808e4499c12889085dc8164568fa96'),
-(3, 'Ralph', '670570dc40d295c82be16b04bf88cce6a2e5db79');
+(4, 'nicolas', '747ba81292263efe575671ecfc8c431eedca138f'),
+(5, 'Fixfox', 'dbef73b7084cbcacaeea28f1d684298e0395bda1'),
+(6, 'Fix', '6cfa2e38dc7c630da1c32d72bb0869320dfbc42c'),
+(8, 'Charles', '40d09ce675c5946f52c8ac7daa910be120794f7d'),
+(9, 'Mirine', '1f84d6679be01fead43c2901fed2d5be7956edf5'),
+(10, 'Albert', 'ae505eb97bc09b41c1e918cabdbf34224c04f4da');
 
 --
 -- Contraintes pour les tables exportées
