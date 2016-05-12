@@ -67,6 +67,8 @@ session_start();
         echo '<a href="auth/disconnect.php">Deconnexion </a>';
         echo '<a href="questionnary/insert-list.php">Création de questionnaire </a>';
         echo '<a href="questionnary/insert_question.php">Ajout de question</a>';
+        echo '<a href="workout/workout.php">S\'entrainer</a>';
+
     }else {
         echo '<a href = "auth/login.php" >Connexion </a >';
         echo '<a href="auth/login.php">Inscription </a>';

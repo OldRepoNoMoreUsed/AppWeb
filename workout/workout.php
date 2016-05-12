@@ -53,7 +53,7 @@ while ($donnees = $list->fetch())
     echo '<td>'.htmlentities($donnees['list_description']).'</td>';
     echo '<td>'.htmlentities($donnees['list_commentary']).'</td>';
     echo '<td>'.htmlentities($donnees['list_difficulty']).'</td>';
-    echo '<td><a href="question.php?'.$donnees['ID_list'].'">Lancer</a></td>';
+    echo '<td><a href="question.php?id='.$donnees['ID_list'].'">Lancer</a></td>';
     echo '</tr>';
 }
 echo '</table>';
