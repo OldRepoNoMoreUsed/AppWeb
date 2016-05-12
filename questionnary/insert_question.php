@@ -77,18 +77,7 @@ if(!isset($_SESSION['user'])){
     <body>
     <h1 id="titreAccueil">Ajouter des questions à vos listes</h1>
     <div id="haut">
-        <?php
-        if(isset($_SESSION['user'])) {
-            echo '<a href="../Compte.php">'.$_SESSION['user'].' '.'</a>';
-            echo '<a href="auth/disconnect.php">Deconnexion </a>';
-            echo '<a href="insert-list.php">Création de questionnaire </a>';
-            echo '<a href="insert_question.php">Ajout de question</a>';
-        }else {
-            echo '<a href = "auth/login.php" >Connexion </a >';
-            echo '<a href="auth/login.php">Inscription </a>';
-        }
-        ?>
-        <a href="">Rechercher un quizz</a>
+        <?php require_once('../bar/menu.php') ?>
     </div>
     <div id="Global">
         <div id="droite" align="center">

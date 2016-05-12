@@ -61,22 +61,7 @@ session_start();
 <body>
 <h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
 <div id="haut">
-    <?php
-    if(isset($_SESSION['user'])) {
-        echo '<a href="Compte.php">'.$_SESSION['user'].' '.'</a>';
-        echo '<a href="auth/disconnect.php">Deconnexion </a>';
-        echo '<a href="questionnary/insert-list.php">Création de questionnaire </a>';
-        echo '<a href="questionnary/insert_question.php">Ajout de question</a>';
-        echo '<a href="workout/workout.php">S\'entrainer</a>';
-
-    }else {
-        echo '<a href = "auth/login.php" >Connexion </a >';
-        echo '<a href="auth/login.php">Inscription </a>';
-    }
-    ?>
-
-    <a href="">Rechercher un quizz</a>
-
+    <?php require_once('bar/menu.php')?>
 
 </div>
 <div id="Global">

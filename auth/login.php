@@ -89,14 +89,11 @@ session_start();
 
   <h1 id="titreAccueil">Connexion a SandBoxLearn</h1>
   <div id="haut">
-      <a href="Compte.php"></a>
-      <a href="auth/disconnect.php">Deconnexion </a>
-      <a href="questionnary/insert-list.php">Création de questionnaire </a>
-      <a href = "auth/login.php" >Connexion </a >
-      <a href="auth/login.php">Inscription </a>
-      <a href="">Rechercher un quizz</a>
+      <?php require_once('../bar/menu.php') ?>
   </div>
+  
   <div id="Global">
+      
       <div id="droite">
           <h2>Baniere droite</h2>
           <p>
@@ -135,6 +132,7 @@ session_start();
           }
           ?>
       </div>
+      
       <div id="gauche">
           <h2>Baniere gauche</h2>
           <p>
@@ -144,11 +142,14 @@ session_start();
               <textarea id = "ChatBox" width="80" height="40">Chatbox</textarea>
           </p>
       </div>
+      
   </div>
+  
   <footer>
       <h3>pied de page</h3>
       <p>On peut mettre ici les crédits</p>
   </footer>
+  
   </body>
 </html>
 

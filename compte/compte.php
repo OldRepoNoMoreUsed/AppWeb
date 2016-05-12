@@ -5,7 +5,7 @@
  * Date: 05.05.2016
  * Time: 11:41
  */
-require_once 'admin/config-db.php';
+require_once '../admin/config-db.php';
 require_once 'function_compte.php';
 session_start();
 
@@ -86,12 +86,11 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
 </head>
 <body>
 <h1 id="titreAccueil">SandBoxLearn</h1>
+
 <div id="haut">
-    <a href="index.php">Page d'accueil</a>
-    <a href="auth/disconnect.php">Deconnexion </a>
-    <a href="questionnary/insert-list.php">Création de questionnaire </a>
-    <a href="">Rechercher un quizz</a>
+    <?php require_once('../bar/menu.php') ?>
 </div>
+
 <div id="Global">
     <div id="droite" align="center">
         <h2>Baniere droite</h2>
