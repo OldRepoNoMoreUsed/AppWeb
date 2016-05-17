@@ -31,54 +31,12 @@ if(!isset($_SESSION['user'])){
         <title>Nouvelle question</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     </head>
-    <style>
-        *{
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        html{
-            height: 100%;
-        }
-        body{
-            position: relative;
-            min-height: 100%;
-            margin: 0;
-            padding 0;
-        }
-        #titreAccueil{
-            text-align:center;
-        }
-        #Global #gauche{
-            float:left;
-            margin-right: auto;
-            width:25%;
-        }
-        #Global #centre{
-            float:left;
-            margin-left:auto;
-            margin-right:auto;
-            width:50%;
-        }
-        #Global #droite{
-            float: left;
-            margin-left: auto;
-            width:25%
-        }
-        #haut{
-            text-align: center;
-        }
-        footer{
-            position:absolute;
-            bottom:0;
-            left:0;
-            right:0;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/page.css" />
     <body>
-    <h1 id="titreAccueil">Ajouter des questions à vos listes</h1>
     <div id="haut">
-        <?php require_once('../bar/menu.php') ?>
+        <?php include_once('../bar/menu.php') ?>
     </div>
+    <h1 id="titreAccueil">Nouvelle question</h1>
     <div id="Global">
         <div id="droite" align="center">
             <h2>Baniere droite</h2>

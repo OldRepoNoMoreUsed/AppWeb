@@ -8,55 +8,15 @@
     <title>insertion liste</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-	<style>
-		*{
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-		}
-		html{
-			height: 100%;
-		}
-		body{
-			position: relative;
-			min-height: 100%;
-			margin: 0;
-			padding 0;
-		}
-		#titreAccueil{
-			text-align:center;
-		}
-		#Global #gauche{
-			float:left;
-			margin-right: auto;
-			width:25%;
-		}
-		#Global #centre{
-			float:left;
-			margin-left:auto;
-			margin-right:auto;
-			width:50%;
-		}
-		#Global #droite{
-			float: left;
-			margin-left: auto;
-			width:25%
-		}
-		#haut{
-			text-align: center;
-		}
-		footer{
-			position:absolute;
-			bottom:0;
-			left:0;
-			right:0;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/page.css" />
 </head>
 	<body>
-		<h1 id="titreAccueil">Ajouter des listes de questions</h1>
+
 		<div id="haut">
-			<?php require_once('../bar/menu.php') ?>
+			<?php include_once('../bar/menu.php') ?>
 		</div>
+
+		<h1 id="titreAccueil">Ajouter des listes de questions</h1>
 
 		<div id="Global">
 			<div id="droite" align="center">
@@ -96,7 +56,7 @@
 							<option>Très difficile</option>
 					</p>
 
-					<input type = "submit" name = "send" id = "send" value ="Envoyer la réponse"/>
+					<input type = "submit" name = "send" id = "send" value ="Valider"/>
 				</form>
 			</div>
 

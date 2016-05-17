@@ -30,6 +30,7 @@ if(!isset($_SESSION['user'])){
 <head>
     <title>Nouvelle question</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/page.css" />
 </head>
 <style type="text/css">
     form
@@ -38,6 +39,10 @@ if(!isset($_SESSION['user'])){
     }
 </style>
 <body>
+
+<div id="haut">
+    <?php include_once('../bar/menu.php') ?>
+</div>
 
 <?php
 

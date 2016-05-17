@@ -6,13 +6,14 @@
 <head>
     <meta charset="utf-8">
     <title>Titre de la page</title>
-    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../css/page.css" />
     <script src="script.js"></script>
 </head>
 <body>
 
-</body>
-</html>
+<div id="haut">
+	<?php include_once('../bar/menu.php') ?>
+</div>
 
 <?php
 /**
@@ -24,20 +25,20 @@
 $a = "test";
 
 $questionnaire = array(
-    array("ads", "a"), 
+	array("ads", "a"),
 	array("ade", "b"),
 	array("awq", "c"),
 	array("are", "d")
 );
 
 function displayQuest(){
-    global $questionnaire;
-	global $a; 
+	global $questionnaire;
+	global $a;
 	$qlength = count($questionnaire);
 	$indexRand = rand(0, $qlength-1);
 	$_SESSION['indexRand'] = $indexRand;
-    echo '<form action="question.php" method="post">';
-    echo '<p>'.$questionnaire[$indexRand][0].' ?</p>';
+	echo '<form action="question.php" method="post">';
+	echo '<p>'.$questionnaire[$indexRand][0].' ?</p>';
 	echo '<label for = "answer">Réponse: </label>';
 	echo '<input type = "text" name = "answer" id = "answer"/>';
 	echo '<input type = "submit" name = "send" id = "send" value ="Envoyer la réponse"/>';
@@ -62,5 +63,10 @@ if(isset($_POST['send'])){
 displayQuest();
 
 ?>
+
+</body>
+</html>
+
+
 
 

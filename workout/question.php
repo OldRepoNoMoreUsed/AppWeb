@@ -55,12 +55,12 @@ function requete($pdo){
 <head>
     <meta charset="utf-8">
     <title>Questionneur</title>
-    <link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../css/page.css" />
     <script src="script.js"></script>
-</head>Mis
+</head>
 <body>
 <div id="haut">
-	<?php require_once('../bar/menu.php') ?>
+	<?php include_once('../bar/menu.php') ?>
 </div>
 
 </body>

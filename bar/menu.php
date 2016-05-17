@@ -12,25 +12,57 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/config_sandboxlearn.php');
 
 <!DOCTYPE html>
 <html>
-<head
+<head><meta charset="utf-8"/>
+<style>
+
+    /* http://www.w3schools.com/css/css_navbar.asp */
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+
+</style>
 </head>
 
 <body>
-    <div>
-        <a href="<?php echo $path ?>">Page d'accueil</a>
+    <ul id="menu">
+        <li class="menuelem"><a href="<?php echo $path ?>">SandBoxLearn</a></li>
         <?php
         if(isset($_SESSION['user'])){
-            echo '<a href="'.$path.'compte/Compte.php">'.$_SESSION['user'].' '.'</a>';
+            echo '<li class="menuelem"><a href="'.$path.'questionnary/insert-list.php">Création de questionnaire </a></li>';
+            echo '<li class="menuelem"><a href="'.$path.'questionnary/insert_question.php">Insertion de question </a></li>';
+            echo '<li class="menuelem"><a href="'.$path.'compte/Compte.php">'.$_SESSION['user'].' '.'</a></li>';
+            echo '<li class="menuelem"><a href="'.$path.'auth/disconnect.php">Deconnexion </a></li>';
         }else{
-            echo '<a href="'.$path.'auth/login.php">Login</a>';
+            echo '<li class="menuelem"><a href="'.$path.'auth/login.php">Connexion </a>';
+            echo '<li class="menuelem"><a href="'.$path.'auth/login.php">Inscription</a>';
         }
 
         ?>
-        <a href="<?php echo $path?>auth/disconnect.php">Deconnexion </a>
-        <a href="<?php echo $path ?>questionnary/insert-list.php">Création de questionnaire </a>
-        <a href="<?php echo $path ?>questionnary/insert_question.php">Insertion de question </a>
-        <a href="">Rechercher un quizz</a>
-    </div>
+
+
+        <!-- <a href="">Rechercher un quizz</a> -->
+    </ul>
     
 </body>
 </html>

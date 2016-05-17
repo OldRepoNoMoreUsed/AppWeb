@@ -39,7 +39,7 @@ function remove_list($id){
 
 function start_list($id){
     echo "On lance une session d entrainement avec la liste: ". $id;
-    header("Location: workout/question.php?id=".$id);
+    header("Location: ../workout/question.php?id=".$id);
 }
 
 function redirect($url){

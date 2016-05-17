@@ -40,55 +40,11 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
 <head>
     <title>Accueil</title>
     <meta charset="utf-8"/>
-    <style>
-        *{
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        html{
-            height: 100%;
-        }
-        body{
-            position: relative;
-            min-height: 100%;
-            margin: 0;
-            padding 0;
-        }
-        #titreAccueil{
-            text-align:center;
-        }
-        #Global #gauche{
-            float:left;
-            margin-right: auto;
-            width:25%;
-        }
-        #Global #centre{
-            float:left;
-            margin-left:auto;
-            margin-right:auto;
-            width:50%;
-        }
-        #Global #droite{
-            float: left;
-            margin-left: auto;
-            width:25%
-        }
-        #haut{
-            text-align: center;
-        }
-        footer{
-            position:absolute;
-            bottom:0;
-            left:0;
-            right:0;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/page.css" />
 </head>
 <body>
-<h1 id="titreAccueil">SandBoxLearn</h1>
-
 <div id="haut">
-    <?php require_once('../bar/menu.php') ?>
+    <?php include_once('../bar/menu.php') ?>
 </div>
 
 <div id="Global">
