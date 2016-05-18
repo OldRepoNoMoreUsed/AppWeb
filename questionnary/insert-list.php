@@ -49,11 +49,11 @@
 					<p>
 						<label for = "list_difficulty">Difficulté </label>
 						<select name = "list_difficulty" >
-							<option>Très facile</option>
-							<option>Facile</option>
-							<option>Moyen</option>
-							<option>Diffile</option>
-							<option>Très difficile</option>
+							<option value="1">Très facile</option>
+							<option value="2">Facile</option>
+							<option value="3">Moyen</option>
+							<option value="4">Diffile</option>
+							<option value="5">Très difficile</option>
 					</p>
 
 					<input type = "submit" name = "send" id = "send" value ="Valider"/>

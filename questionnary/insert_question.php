@@ -87,9 +87,9 @@ if(!isset($_SESSION['user'])){
 
             if(isset($_GET['ID_list'])) {
             //Question déjà existantes
-                $reponse = $pdo->query('SELECT Question, Answer FROM tb_question, tb_list_question, tb_list WHERE ID_list=' . $_GET['ID_list'] . ' AND ID_list=list_ID_list AND question_ID_question = ID_question ORDER BY ID_Question DESC ');
+                $reponse = $pdo->query('SELECT ID_Question, Question, Answer FROM tb_question, tb_list_question, tb_list WHERE ID_list=' . $_GET['ID_list'] . ' AND ID_list=list_ID_list AND question_ID_question = ID_question AND list_owner_user = ' . $_SESSION['ID_User'] . ' AND ID_list=list_ID_list AND question_ID_question = ID_question ORDER BY ID_Question DESC ');
             }else{
-                $reponse = $pdo->query('SELECT Question, Answer, list_name FROM tb_question, tb_list_question, tb_list WHERE ID_list=list_ID_list AND question_ID_question = ID_question ORDER BY ID_Question DESC ');
+                $reponse = $pdo->query('SELECT ID_Question, Question, Answer, list_name FROM tb_question, tb_list_question, tb_list WHERE ID_list=list_ID_list AND question_ID_question = ID_question AND list_owner_user = ' . $_SESSION['ID_User'] . ' ORDER BY ID_Question DESC ');
             }
 
 
@@ -100,7 +100,7 @@ if(!isset($_SESSION['user'])){
                 echo '<td>'.htmlentities($donnees['Question']).'</td>';
                 echo '<td>'.htmlentities($donnees['Answer']).'</td>';
                 if(!isset($_GET['ID_list'])) {echo '<td>'.htmlentities($donnees['list_name']).'</td>';}
-                echo '<td><a href="">Modifier(a faire)</a></td>';
+                echo '<td><a href="edit_question.php?ID_Question='.htmlentities($donnees['ID_Question']).'">Modifier(a faire)</a></td>';
                 echo '<td><a href="">Supprimer(a faire)</a></td>';
                 echo '</tr>';
             }
