@@ -13,7 +13,7 @@
 	<body>
 
 		<div id="haut">
-			<?php include_once('../bar/menu.php') ?>
+			<?php require_once('../bar/menu.php') ?>
 		</div>
 
 		<h1 id="titreAccueil">Ajouter des listes de questions</h1>
@@ -71,10 +71,8 @@
 			</div>
 			
 		</div>
-		<footer>
-			<h3>pied de page</h3>
-			<p>On peut mettre ici les crédits</p>
-		</footer>
+		
+		<?php require_once('../bar/footer.php')?>
 
 
 	</body>

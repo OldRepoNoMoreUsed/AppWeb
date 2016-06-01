@@ -41,8 +41,10 @@ if(!isset($_SESSION['user'])){
 <body>
 
 <div id="haut">
-    <?php include_once('../bar/menu.php') ?>
+    <?php require_once('../bar/menu.php') ?>
 </div>
+
+<?php require_once('../bar/footer.php')?>
 
 <?php
 

@@ -22,6 +22,18 @@ function get_question($tri) {
     return $db->query($sql_query);
 }
 
+function get_questionSideBar($tri) {
+    global $db; // variable permettant l'accès à la base
+    echo "Questionnaire lié à l'utilisateur: ".$_SESSION['user'];
+
+    $sql_query = 'SELECT ID_list, list_name
+                 FROM tb_list, tb_user 
+                 WHERE tb_user.ID_User = tb_list.list_owner_user AND tb_user.username = "'. $_SESSION['user'].'"
+                 ORDER BY '.$db->quote($tri).' ASC';
+
+    return $db->query($sql_query);
+}
+
 function balisage ($liste, $b = "td") {
     $callback = function($element) use ($b) {
         return "<" . $b . ">" . $element . "</" . $b . ">";

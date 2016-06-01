@@ -18,7 +18,7 @@
 <body>
 <h1 id="titreAccueil">Accueil du projet SandBoxLearn</h1>
 <div id="haut">
-    <?php include_once('../bar/menu.php') ?>
+    <?php require_once('../bar/menu.php') ?>
 </div>
 <div id="Global">
     <div id="droite">
@@ -46,10 +46,8 @@
         </p>
     </div>
 </div>
-<footer>
-    <h3>pied de page</h3>
-    <p>On peut mettre ici les crédits</p>
-</footer>
+
+<?php require_once('../bar/footer.php')?>
 
 
 </body>
