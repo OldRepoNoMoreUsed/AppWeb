@@ -27,7 +27,6 @@ if(isset($_GET['id'])){
 
 }else{
 	if(isset($_SESSION['id'])){
-		echo "On passe avec la session[id]";
 		$questionnaire = requete($pdo);
 	}else {
 		header("Location: ../index.php");
@@ -35,7 +34,7 @@ if(isset($_GET['id'])){
 }
 
 function requete($pdo){
-	$sql_query = 'SELECT tb_question.Question , tb_question.Answer 
+	$sql_query = 'SELECT tb_question.Question , tb_question.Answer, tb_question.ID_Question
 				  FROM tb_list_question, tb_question 
 				  WHERE tb_list_question.question_ID_question = tb_question.ID_Question AND tb_list_question.list_ID_list = '.$_SESSION['id'].' ORDER BY rand() LIMIT 1';
 
@@ -90,6 +89,7 @@ function displayQuest(){
 	$qlength = count($questionnaire);
 	$indexRand = rand(0, $qlength-1);
 	$_SESSION['indexRand'] = $indexRand;
+	$_SESSION['ID_Question'] = $questionnaire[$indexRand][2];
     echo '<form action="question.php" method="post">';
     echo '<p>'.$questionnaire[$indexRand][0].' ?</p>';
 	echo '<label for = "answer">Réponse: </label>';
@@ -98,21 +98,37 @@ function displayQuest(){
 	echo '</form>';
 }
 
-function validateAnswer(){
+function validateAnswer($pdo){
 	global $questionnaire;
-	echo '<p>Réponse envoyé:'.$_POST['answer'].'</p>';
-	echo 'Reponse attendu:'. $_SESSION['questionnaire1'][$_SESSION['indexRand']][1];
+	echo '<p>Réponse envoyée:'.$_POST['answer'].'</p>';
+	echo 'Réponse attendue:'. $_SESSION['questionnaire1'][$_SESSION['indexRand']][1];
+	$state = $pdo->prepare('SELECT * FROM tb_masteries WHERE user_ID_Utilisateur ='.$_SESSION['ID_User'].' AND question_ID_Question = '.$_SESSION['ID_Question']);
+	$state->execute();
 	if($_POST['answer'] == $_SESSION['questionnaire1'][$_SESSION['indexRand']][1]){
 		echo '<p>Bonne réponse</p>';
+		//Modification du savoir de l'utilisateur
+		if ($state->fetchColumn() < 1){
+			$pdo->exec('INSERT INTO tb_masteries (user_ID_Utilisateur, question_ID_Question, level, last_answer) VALUES ('.$_SESSION['ID_User'].', '.$_SESSION['ID_Question'].', 1, 1);');
+		}
+		else{
+			$pdo->exec('UPDATE tb_masteries SET level = level + 1, last_answer = 1 WHERE user_ID_Utilisateur ='.$_SESSION['ID_User'].' AND question_ID_Question = '.$_SESSION['ID_Question']);
+		}
 
+		//$req = $pdo->prepare("INSERT INTO tb_masteries (last_answer, level, list_commentary, list_difficulty, list_owner_user) VALUES (?, ?, ?, ?, ?)");
 	}
 	else{
 		echo '<p>Mauvaise réponse !</p>';
+		if ($state->fetchColumn() == FALSE){
+			$pdo->exec('INSERT INTO tb_masteries (user_ID_Utilisateur, question_ID_Question, level, last_answer) VALUES ('.$_SESSION['ID_User'].', '.$_SESSION['ID_Question'].', 0, 0)');
+		}
+		else{
+			$pdo->exec('UPDATE tb_masteries SET level = level - 1, last_answer = 0 WHERE user_ID_Utilisateur ='.$_SESSION['ID_User'].' AND question_ID_Question = '.$_SESSION['ID_Question']);
+		}
 	}
 }
 if(isset($_POST['send'])){
 	echo 'Réponse envoyé';
-	validateAnswer();
+	validateAnswer($pdo);
 }
 displayQuest();
 
