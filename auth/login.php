@@ -79,6 +79,7 @@ session_start();
       
   </div>
 
+  <?php require_once('../bar/footer.php')?>
   
   </body>
 </html>

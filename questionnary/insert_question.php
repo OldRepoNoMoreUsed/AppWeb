@@ -34,7 +34,7 @@ if(!isset($_SESSION['user'])){
     <link rel="stylesheet" href="../css/page.css" />
     <body>
     <div id="haut">
-        <?php include_once('../bar/menu.php') ?>
+        <?php require_once('../bar/menu.php') ?>
     </div>
     <h1 id="titreAccueil">Nouvelle question</h1>
     <div id="Global">
@@ -119,10 +119,7 @@ if(!isset($_SESSION['user'])){
             </p>
         </div>
     </div>
-    <footer>
-        <h3>pied de page</h3>
-        <p>On peut mettre ici les crédits</p>
-    </footer>
+    <?php require_once('../bar/footer.php')?>
 
 </body>
 </html>

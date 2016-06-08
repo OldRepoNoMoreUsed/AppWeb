@@ -60,8 +60,10 @@ function requete($pdo){
 </head>
 <body>
 <div id="haut">
-	<?php include_once('../bar/menu.php') ?>
+	<?php require_once('../bar/menu.php') ?>
 </div>
+
+<?php require_once('../bar/footer.php')?>
 
 </body>
 </html>

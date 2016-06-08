@@ -23,33 +23,17 @@ session_start();
 </div>
 <div id="Global">
     <div id="droite" align="center">
-        <h2>Baniere droite</h2>
-        <p>
-            <textarea id = width="40" height="20">Ceci contiendra les tags</textarea>
-        </p>
-        <p>
-            <textarea id = "ChatBox" width="80" height="40">Chatbox</textarea>
-        </p>
+        <?php require_once('bar/sidebarRight.php')?>
     </div>
     <div id="centre" align="center">
 
         <h2>Qu'est ce que SandBoxLearn</h2>
         <p>SandBoxLearn est une application sur le web permettant l'apprentissage via des questionnaires que chaque utilisateur peut créer selon ses envies.</p>
     </div>
-    <div id="gauche" align="center">
-        <h2>Baniere gauche</h2>
-        <p>
-            <textarea id = width="40" height="20">Ceci contiendra les tags</textarea>
-        </p>
-        <p>
-            <textarea id = "ChatBox" width="80" height="40">Chatbox</textarea>
-        </p>
-    </div>
+
 </div>
-<footer>
-    <h3>pied de page</h3>
-    <p>On peut mettre ici les crédits</p>
-</footer>
+
+<?php require_once('bar/footer.php')?>
 
 
 </body>

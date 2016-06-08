@@ -41,7 +41,7 @@ $data = $question->fetch();
 <link rel="stylesheet" href="../css/page.css" />
 <body>
 <div id="haut">
-    <?php include_once('../bar/menu.php') ?>
+    <?php require_once('../bar/menu.php') ?>
 </div>
         <form action="update_question_post.php" method="post">
             <p>
@@ -60,6 +60,8 @@ $data = $question->fetch();
         </form>
 
 </body>
+
+<?php require_once('../bar/footer.php')?>
 </html>
 
 

@@ -44,7 +44,7 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
 </head>
 <body>
 <div id="haut">
-    <?php include_once('../bar/menu.php') ?>
+    <?php require_once('../bar/menu.php') ?>
 </div>
 
 <div id="Global">
@@ -99,10 +99,7 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
         </p>
     </div>
 </div>
-<footer>
-    <h3>pied de page</h3>
-    <p>On peut mettre ici les crédits</p>
-</footer>
+<?php require_once('../bar/footer.php')?>
 
 
 </body>
