@@ -51,7 +51,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/config_sandboxlearn.php');
         if(isset($_SESSION['user'])){
             echo '<li class="menuelem"><a href="'.$path.'questionnary/insert-list.php">Création de questionnaire </a></li>';
             echo '<li class="menuelem"><a href="'.$path.'questionnary/insert_question.php">Insertion de question </a></li>';
-            echo '<li class="menuelem"><a href="'.$path.'compte/Compte.php">'.$_SESSION['user'].' '.'</a></li>';
+            echo '<li class="menuelem"><a href="'.$path.'compte/compte.php">'.$_SESSION['user'].' '.'</a></li>';
             echo '<li class="menuelem"><a href="'.$path.'auth/disconnect.php">Deconnexion </a></li>';
         }else{
             echo '<li class="menuelem"><a href="'.$path.'auth/login.php">Connexion </a>';
