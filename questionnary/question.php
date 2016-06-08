@@ -33,7 +33,6 @@ $questionnaire = array(
 
 function displayQuest(){
 	global $questionnaire;
-	global $a;
 	$qlength = count($questionnaire);
 	$indexRand = rand(0, $qlength-1);
 	$_SESSION['indexRand'] = $indexRand;

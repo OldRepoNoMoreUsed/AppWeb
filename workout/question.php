@@ -102,6 +102,7 @@ function validateAnswer(){
 	echo 'Reponse attendu:'. $_SESSION['questionnaire1'][$_SESSION['indexRand']][1];
 	if($_POST['answer'] == $_SESSION['questionnaire1'][$_SESSION['indexRand']][1]){
 		echo '<p>Bonne réponse</p>';
+
 	}
 	else{
 		echo '<p>Mauvaise réponse !</p>';
