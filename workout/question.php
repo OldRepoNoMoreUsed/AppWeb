@@ -34,6 +34,35 @@ if(isset($_GET['id'])){
 }
 
 function requete($pdo){
+	$req = $pdo->prepare('SELECT Question, Answer, ID_Question FROM tb_question, tb_list_question, tb_masteries 
+							WHERE list_ID_list = :list AND ID_Question = tb_masteries.question_ID_question AND tb_masteries.user_ID_Utilisateur = :user 
+							AND tb_masteries.level => :levelmin AND tb_masteries.level =< :levelmax
+							AND tb_masteries.last_answer <= :last_answer ORDER BY rand() LIMIT 1');
+
+	//On regarde si on a un mot en maitrise négative
+	$ques = $req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'],':levelmin' => -666, ':levelmax' => 0, ':last_answer' => 1));
+	//Si il y en a pas, on choisit aléatoirement un nouveau mot
+	while($ques->rowCount() == 0){
+		$alea = rand(1, 20);
+		//Dernier faux
+		if ($alea < 6) {
+			$ques = $req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'], ':levelmin' => -666, ':levelmax' => 666, ':last_answer' => 0));
+		} //basse Maitrise <= 3
+		elseif ($alea < 9) {
+			$ques = $req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'], ':levelmin' => -666, ':levelmax' => 3, ':last_answer' => 1));
+		} //moyenne Maitrise =>4 et <=6
+		elseif ($alea < 11) {
+			$ques = $req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'], ':levelmin' => 4, ':levelmax' => 6, ':last_answer' => 1));
+		} //haute Maitrise =>7
+		elseif ($alea < 13) {
+			$ques = $req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'], ':levelmin' => 7, ':levelmax' => 666, ':last_answer' => 1));
+		} //Nouveau Mot
+		else {
+			$ques = $pdo->query('SELECT Question, Answer, ID_Question FROM tb_question WHERE ID_Question NOT IN 
+							(SELECT question_ID_question FROM tb_masteries WHERE user_ID_Utilisateur =' . ($_SESSION['ID_User'] + 0) . ' ORDER BY rand() LIMIT 1)');
+		}
+	}
+
 	$sql_query = 'SELECT tb_question.Question , tb_question.Answer, tb_question.ID_Question
 				  FROM tb_list_question, tb_question 
 				  WHERE tb_list_question.question_ID_question = tb_question.ID_Question AND tb_list_question.list_ID_list = '.$_SESSION['id'].' ORDER BY rand() LIMIT 1';
