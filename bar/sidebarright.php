@@ -61,7 +61,7 @@
         remove_list($_GET['del']);
         redirect($base_url);
     }elseif (isset($_GET['start']) && is_scalar($_GET['start']) && is_numeric($_GET['start'])){
-        start_list($_GET['start']);
+        start_list($path, $_GET['start']);
     }
     elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
         $tri = $_GET['tri'];

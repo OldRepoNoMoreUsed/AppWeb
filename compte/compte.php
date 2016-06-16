@@ -7,6 +7,7 @@
  */
 require_once '../admin/config-db.php';
 require_once 'function_compte.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/config_sandboxlearn.php');
 session_start();
 
 $base_url = $_SERVER['PHP_SELF'];
@@ -24,7 +25,7 @@ if(isset($_GET['del']) && is_scalar($_GET['del']) && is_numeric($_GET['del'])){
     remove_list($_GET['del']);
     redirect($base_url);
 }elseif (isset($_GET['start']) && is_scalar($_GET['start']) && is_numeric($_GET['start'])){
-    start_list($_GET['start']);
+    start_list($path, $_GET['start']);
 }
 elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
     $tri = $_GET['tri'];
