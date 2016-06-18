@@ -1,13 +1,8 @@
 ﻿<?php 
 require_once '../admin/config-db.php';
+require_once '../admin/open-db.php';
 
-session_start();
 
-try{
-	$pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);  
-} catch(Exception $e){
-	die('Erreur : '.$e->getMessage());
-}
 
 
 

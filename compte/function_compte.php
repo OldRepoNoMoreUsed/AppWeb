@@ -10,28 +10,15 @@ function action_links ($url, $action, $element, $contenu) {
     return '<a href="'.$url.'?'.urlencode($action).'='.urlencode($element).'">'.htmlentities($contenu).'</a>';
 }
 
-function get_question($tri) {
-    global $db; // variable permettant l'accès à la base
+function get_question($tri, $pdo) {
     echo "Questionnaire lié à l'utilisateur: ".$_SESSION['user'];
 
     $sql_query = 'SELECT ID_list, list_name, list_description
                  FROM tb_list, tb_user 
-                 WHERE tb_user.ID_User = tb_list.list_owner_user AND tb_user.username = "'. $_SESSION['user'].'"
-                 ORDER BY '.$db->quote($tri).' ASC';
+                 WHERE tb_user.ID_User = tb_list.list_owner_user AND tb_user.username = '. $pdo->quote($_SESSION['user']).'
+                 ORDER BY '.$pdo->quote($tri).' ASC';
 
-    return $db->query($sql_query);
-}
-
-function get_questionSideBar($tri) {
-    global $db; // variable permettant l'accès à la base
-    echo "Questionnaire lié à l'utilisateur: ".$_SESSION['user'];
-
-    $sql_query = 'SELECT ID_list, list_name
-                 FROM tb_list, tb_user 
-                 WHERE tb_user.ID_User = tb_list.list_owner_user AND tb_user.username = "'. $_SESSION['user'].'"
-                 ORDER BY '.$db->quote($tri).' ASC';
-
-    return $db->query($sql_query);
+    return $pdo->query($sql_query);
 }
 
 function balisage ($liste, $b = "td") {
@@ -42,21 +29,23 @@ function balisage ($liste, $b = "td") {
 }
 
 function remove_list($id){
-    echo "On delete un élément";
-    /*global $db;
-    $val = intval($id);
-    $sql_query = "";
-    $db->query($sql_query);*/
+    //Quel dommage, pas encore implémenté
+    //TODO : Implémenter la suppression de liste
 }
 
 function start_list($path, $id){
     echo "On lance une session d entrainement avec la liste: ". $id;
-    header("Location: ".$path."/workout/question.php?id=".$id);
+    redirect("Location: ".$path."/workout/question.php?id=".$id);
 }
 
 function redirect($url){
     header("Location: $url");
     exit();
 }
+
+function validated($tab, $elem, $func){
+    return (isset($tab[$elem[0]]) && is_scalar(isset($tab[$elem[0]])) && call_user_func($func, $tab[$elem[0]], $elem[1]));
+}
+
 
 ?>

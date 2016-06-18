@@ -14,18 +14,18 @@ body{
 #titreAccueil{
     text-align:center;
 }
-#Global #gauche{
+#global #gauche{
     float:left;
     margin-right: auto;
     width:25%;
 }
-#Global #centre{
+#global #centre{
     float:left;
     margin-left:auto;
     margin-right:auto;
     width:50%;
 }
-#Global #droite{
+#global #droite{
     float: left;
     margin-left: auto;
     width:25%

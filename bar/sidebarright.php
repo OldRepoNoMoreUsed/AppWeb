@@ -47,16 +47,12 @@
     if(isset($_SESSION['user'])) {
         require_once($_SERVER['DOCUMENT_ROOT'] . '/config_sandboxlearn.php');
         require_once $_SERVER['DOCUMENT_ROOT'] . $path . "admin/config-db.php";
+        require_once $_SERVER['DOCUMENT_ROOT'] . $path . "admin/open-db.php";
         require_once $_SERVER['DOCUMENT_ROOT'] . $path . "compte/function_compte.php";
 
         $colonnes = array("ID", "Nom");
         $base_url = $_SERVER['PHP_SELF'];
-
-        try {
-            $db = new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ";charset=utf8", DBUSER, DBPASSWORD);
-        } catch (Exception $e) {
-            die('Erreur:' . $e->getMessage());
-        }
+        
 
         if (isset($_GET['del']) && is_scalar($_GET['del']) && is_numeric($_GET['del'])) {
             remove_list($_GET['del']);
@@ -88,7 +84,7 @@
     <?php
     //Ceci est sale, cependant le temps manque pour rendre propre ce test
     if(isset($_SESSION['user'])) {
-        if ($question_list = get_questionSideBar($tri)) {
+        if ($question_list = get_question($tri, $pdo)) {
             while ($row = $question_list->fetch(PDO::FETCH_ASSOC)) {
                 echo "<tr>"
                     . balisage(array_map("htmlentities", $row))

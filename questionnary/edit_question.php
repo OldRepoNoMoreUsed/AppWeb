@@ -3,8 +3,9 @@
 //Ajouter précision  liste
 
 require_once '../admin/config-db.php';
+require_once '../admin/open-db.php';
+require_once '../compte/function_compte.php';
 
-session_start();
 /**
  * Created by PhpStorm.
  * User: cyril
@@ -13,22 +14,18 @@ session_start();
  */
 
 // Connexion à la base de données
-try{
-    $pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-} catch(Exception $e){
-    die('Erreur : '.$e->getMessage());
-}
+
 
 if(!isset($_SESSION['user'])){
-    header('Location: ../auth/login.php');
-    exit;
+    redirect("../auth/login.php");
 }
 
 if(!isset($_GET['ID_Question'])){
-    header('Location: insert_question.php');
+    redirect("../auth/login.php");
 }
 
 $question = $pdo->query('SELECT ID_Question, Question, Answer FROM tb_question WHERE ID_Question='.$_GET['ID_Question']);
+$_SESSION['ID_Question_edit']=$_GET['ID_Question'];
 $data = $question->fetch();
 
 ?>
@@ -55,7 +52,7 @@ $data = $question->fetch();
             </p>
 
             <p>
-                <input type="submit" value="Modifoer" />
+                <input type="submit" value="Modifier" />
             </p>
         </form>
 

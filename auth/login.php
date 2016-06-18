@@ -1,7 +1,6 @@
 <?php
 require_once 'class/config-production.php';
 
-session_start();
 
 ?>
 
@@ -18,7 +17,7 @@ session_start();
       <?php require_once('../bar/menu.php') ?>
   </div>
   
-  <div id="Global">
+  <div id="global">
       
       <div id="droite">
           <h2>Baniere droite</h2>
@@ -49,9 +48,9 @@ session_start();
           }
           }
           elseif(isset($_POST["new_user"])){
-          if($auth->addUser(htmlentities($_POST["user_name"]),htmlentities($_POST["user_pwd"]))){
+          if($auth->addUser($_POST["user_name"],$_POST["user_pwd"])){
           echo '<p>Utilisateur créé</p>';
-          $auth->checkUser(htmlentities($_POST["user_name"]),htmlentities($_POST["user_pwd"]));
+          $auth->checkUser($_POST["user_name"],$_POST["user_pwd"]);
           header('Location: ../index.php');
           }
           else{

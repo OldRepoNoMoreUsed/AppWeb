@@ -2,16 +2,9 @@
 
 class Auth_DB extends Auth_Abstract{
     private $db;
-    function __construct()
+    function __construct($pdo)
     {
-        try{
-            $this->db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-        }
-        catch (Exception $e)
-        {
-            die('Erreur : ' . $e->getMessage());
-        }
-
+        $this->db = $pdo;
     }
 
     function checkUser($name, $pwd)

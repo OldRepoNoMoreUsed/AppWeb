@@ -6,29 +6,25 @@
  * Time: 11:41
  */
 require_once '../admin/config-db.php';
+require_once '../admin/open-db.php';
 require_once 'function_compte.php';
 require_once($_SERVER['DOCUMENT_ROOT'].'/config_sandboxlearn.php');
-session_start();
+
 
 $base_url = $_SERVER['PHP_SELF'];
 
 $colonnes = array("ID", "Nom");
 
-try{
-    $db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-}catch(Exception $e)
-{
-    die('Erreur:'.$e->getMessage());
-}
 
-if(isset($_GET['del']) && is_scalar($_GET['del']) && is_numeric($_GET['del'])){
+
+if(validated($_GET, array('del'), "is_numeric")){
     remove_list($_GET['del']);
     redirect($base_url);
-}elseif (isset($_GET['start']) && is_scalar($_GET['start']) && is_numeric($_GET['start'])){
+}elseif (validated($_GET, array('start'), "is_numeric")){
     start_list($path, $_GET['start']);
 }
-elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
-    $tri = $_GET['tri'];
+elseif(validated($_GET, array('tri', $colonnes), "in_array")){
+        $tri = $_GET['tri'];
 } else {
     $tri = "ID";
 }
@@ -48,8 +44,8 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
     <?php require_once('../bar/menu.php') ?>
 </div>
 
-<div id="Global">
-    <div id="droite" align="center">
+<div id="global">
+    <div id="droite" align="left">
         <h2>Baniere droite</h2>
         <p>
             <textarea id = width="40" height="20">Ceci contiendra les tags</textarea>
@@ -78,7 +74,7 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
                 <th>Supprimer</th>
             </tr>
             <?php
-                if($question_list = get_question($tri)){
+                if($question_list = get_question($tri, $pdo)){
                     while($row = $question_list->fetch(PDO::FETCH_ASSOC)){
                         echo "<tr>"
                             .balisage(array_map("htmlentities", $row))
@@ -90,7 +86,7 @@ elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'],
             ?>
         </table>
     </div>
-    <div id="gauche" align="center">
+    <div id="gauche" align="right">
         <h2>Baniere gauche</h2>
         <p>
             <textarea id = width="40" height="20">Ceci contiendra les tags</textarea>

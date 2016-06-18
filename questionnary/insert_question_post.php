@@ -10,19 +10,13 @@
 
 
 require_once '../admin/config-db.php';
-session_start();
+require_once '../admin/open-db.php';
 
 ?>
 
 
 <?php
 
-// Connexion à la base de données
-try{
-    $pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-} catch(Exception $e){
-    die('Erreur : '.$e->getMessage());
-}
 
 
 //Transaction ?
@@ -34,5 +28,5 @@ $id = $pdo->lastInsertId();
 $list = $pdo->prepare('INSERT INTO tb_list_question (list_ID_list, question_ID_question) VALUES(?, ?)');
 $list->execute(array($_POST['list'], $id));
 
-header('Location: insert_question.php?ID_list='.$_POST['list']);
+header('Location: insert_question.php?ID_list='.urlencode($_POST['list']));
 ?>

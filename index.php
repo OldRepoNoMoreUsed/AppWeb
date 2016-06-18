@@ -21,7 +21,7 @@ session_start();
     <?php include_once('bar/menu.php')?>
 
 </div>
-<div id="Global">
+<div id="global">
     <div id="droite" align="center">
         <?php require_once('bar/sidebarRight.php')?>
     </div>

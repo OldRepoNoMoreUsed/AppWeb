@@ -3,26 +3,16 @@
 //Ajouter précision  liste
 
 require_once '../admin/config-db.php';
+require_once '../admin/open-db.php';
+require_once '../compte/function_compte.php';
 
-session_start();
-/**
- * Created by PhpStorm.
- * User: cyril
- * Date: 04.05.2016
- * Time: 16:06
- */
-
-// Connexion à la base de données
-try{
-    $pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-} catch(Exception $e){
-    die('Erreur : '.$e->getMessage());
+if(isset($_GET['ID_list'])){
+    $_SESSION['list']=$_GET['ID_list'];
+}
+else{
+    $_SESSION['list']="";
 }
 
-if(!isset($_SESSION['user'])){
-    header('Location: ../auth/login.php');
-    exit;
-}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -37,7 +27,7 @@ if(!isset($_SESSION['user'])){
         <?php require_once('../bar/menu.php') ?>
     </div>
     <h1 id="titreAccueil">Nouvelle question</h1>
-    <div id="Global">
+    <div id="global">
         <div id="droite" align="center">
             <h2>Baniere droite</h2>
             <p>
@@ -60,7 +50,7 @@ if(!isset($_SESSION['user'])){
                 </p>
 
                 <?php
-                if(!isset($_GET['ID_list'])){
+                if(!isset($_GET['ID_list']) || $_GET['ID_list'] == ""){
                     echo '<p>';
                     echo '<label for = "list">Liste </label>';
                     echo '<select name="list" id="list">';
@@ -69,7 +59,7 @@ if(!isset($_SESSION['user'])){
                         echo '<option value="error">Veuillez créer une liste</option>';
                     }else{
                         while($donnees = $list->fetch()){
-                            echo '<option value="'.$donnees['ID_list'].'">'.$donnees['list_name'].'</option>';
+                            echo '<option value="'.urlencode($donnees['ID_list']).'">'.htmlentities($donnees['list_name']).'</option>';
                         }
                     }
                     echo '</p>';
@@ -94,15 +84,13 @@ if(!isset($_SESSION['user'])){
 
 
             echo '<table>';
-            while ($donnees = $reponse->fetch())
+            while ($donnees = $reponse->fetch(PDO::FETCH_ASSOC))
             {
-                echo '<tr>';
-                echo '<td>'.htmlentities($donnees['Question']).'</td>';
-                echo '<td>'.htmlentities($donnees['Answer']).'</td>';
-                if(!isset($_GET['ID_list'])) {echo '<td>'.htmlentities($donnees['list_name']).'</td>';}
-                echo '<td><a href="edit_question.php?ID_Question='.urlencode($donnees['ID_Question']).'">Modifier(a faire)</a></td>';
-                echo '<td><a href="">Supprimer(a faire)</a></td>';
-                echo '</tr>';
+                echo "<tr>"
+                    .balisage(array_map("htmlentities", $donnees))
+                    ."<td>".action_links("edit_question.php", "ID_Question", $donnees['ID_Question'], "Modifier")."</td>"
+                    //."<td>".action_links($_SERVER['PHP_SELF'], "Supprimer", $row['ID_list'], "X")."</td>"
+                    ."</tr>";
             }
             echo '</table>';
             $reponse->closeCursor();

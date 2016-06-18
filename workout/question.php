@@ -1,19 +1,7 @@
 <?php
 
 require_once '../admin/config-db.php';
-session_start();
-
-// Connexion à la base de données
-try{
-	$pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-} catch(Exception $e){
-	die('Erreur : '.$e->getMessage());
-}
-
-if(!isset($_SESSION['user'])){
-	header('Location: ../auth/login.php');
-	exit;
-}
+require_once '../admin/open-db.php';
 
 if(isset($_GET['id'])){
 	$_SESSION['id'] = $_GET['id'];
@@ -23,6 +11,7 @@ if(!isset($_SESSION['id'])){
 }
 
 function requete($pdo){
+
 	$req = $pdo->prepare('SELECT Question, Answer, ID_Question FROM tb_question, tb_list_question, tb_masteries 
 							WHERE list_ID_list = :list AND ID_Question = tb_masteries.question_ID_question AND tb_masteries.user_ID_Utilisateur = :user 
 							AND tb_masteries.level > :levelmin AND tb_masteries.level < :levelmax
@@ -79,30 +68,30 @@ function requete($pdo){
 </html>
 
 <?php
-/**
- * Created by PhpStorm.
- * User: cyril.ruedin, nicolas.sommer
- * Date: 23.03.2016
- * Time: 11:07
- */
-
 
 function displayQuest($pdo){
-
-	$quest = requete($pdo);
-	$_SESSION['ID_Question'] = $quest['ID_Question'];
-	$_SESSION['Answer'] = $quest['Answer'];
-    echo '<form action="question.php" method="post">';
-    echo '<p>'.$quest['Question'].' ?</p>';
-	echo '<label for = "answer">Réponse: </label>';
-	echo '<input type = "text" name = "answer" id = "answer"/>';
-	echo '<input type = "submit" name = "send" id = "send" value ="Envoyer la réponse"/>';
-	echo '</form>';
+	//Test si la liste n'est pas vide
+	$tst = $pdo->prepare('SELECT * FROM tb_list_question WHERE list_ID_list = ?');
+	$tst->execute(array($_SESSION['id']));
+	if($tst->fetch()){
+		$quest = requete($pdo);
+		$_SESSION['ID_Question'] = $quest['ID_Question'];
+		$_SESSION['Answer'] = $quest['Answer'];
+		echo '<form action="question.php" method="post">';
+		echo '<p>'.htmlentities($quest['Question']).' ?</p>';
+		echo '<label for = "answer">Réponse: </label>';
+		echo '<input type = "text" name = "answer" id = "answer"/>';
+		echo '<input type = "submit" name = "send" id = "send" value ="Envoyer la réponse"/>';
+		echo '</form>';
+	}
+	else{
+		echo '<p>Liste vide, veuillez ajouter des questions</p>';
+	}
 }
 
 function validateAnswer($pdo){
-	echo '<p>Réponse envoyée:'.$_POST['answer'].'</p>';
-	echo '<p>Réponse attendue:'.$_SESSION['Answer'].'</p>';
+	echo '<p>Réponse envoyée:'.htmlentities($_POST['answer']).'</p>';
+	echo '<p>Réponse attendue:'.htmlentities($_SESSION['Answer']).'</p>';
 	$state = $pdo->prepare('SELECT * FROM tb_masteries WHERE user_ID_Utilisateur ='.$_SESSION['ID_User'].' AND question_ID_Question = '.$_SESSION['ID_Question']);
 	$state->execute();
 	if($_POST['answer'] == $_SESSION['Answer']){
@@ -120,10 +109,10 @@ function validateAnswer($pdo){
 	else{
 		echo '<p>Mauvaise réponse !</p>';
 		if ($state->fetchColumn() == FALSE){
-			$pdo->exec('INSERT INTO tb_masteries (user_ID_Utilisateur, question_ID_Question, level, last_answer) VALUES ('.$_SESSION['ID_User'].', '.$_SESSION['ID_Question'].', 0, 0)');
+			$pdo->exec('INSERT INTO tb_masteries (user_ID_Utilisateur, question_ID_Question, level, last_answer) VALUES ('.$pdo->quote($_SESSION['ID_User']).', '.$pdo->quote($_SESSION['ID_Question']).', 0, 0)');
 		}
 		else{
-			$pdo->exec('UPDATE tb_masteries SET level = level - 1, last_answer = 0 WHERE user_ID_Utilisateur ='.$_SESSION['ID_User'].' AND question_ID_Question = '.$_SESSION['ID_Question']);
+			$pdo->exec('UPDATE tb_masteries SET level = level - 1, last_answer = 0 WHERE user_ID_Utilisateur ='.$pdo->quote($_SESSION['ID_User']).' AND question_ID_Question = '.$pdo->quote($_SESSION['ID_Question']));
 		}
 	}
 }

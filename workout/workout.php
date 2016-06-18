@@ -14,6 +14,11 @@ session_start();
 
 // Connexion à la base de données
 try{
+
+    ws45675fdtsx6figaiudsfgo69ua s
+
+
+
     $pdo = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
 } catch(Exception $e){
     die('Erreur : '.$e->getMessage());
