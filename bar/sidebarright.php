@@ -43,50 +43,58 @@
 
 <body>
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'].'/config_sandboxlearn.php');
-    require_once $_SERVER['DOCUMENT_ROOT'].$path."admin/config-db.php";
-    require_once $_SERVER['DOCUMENT_ROOT'].$path."compte/function_compte.php";
+    //Si l'utilisateur n'est pas défini, ne fais rien, pas de sidebar
+    if(isset($_SESSION['user'])) {
+        require_once($_SERVER['DOCUMENT_ROOT'] . '/config_sandboxlearn.php');
+        require_once $_SERVER['DOCUMENT_ROOT'] . $path . "admin/config-db.php";
+        require_once $_SERVER['DOCUMENT_ROOT'] . $path . "compte/function_compte.php";
 
-    $colonnes = array("ID","Nom");
-    $base_url = $_SERVER['PHP_SELF'];
+        $colonnes = array("ID", "Nom");
+        $base_url = $_SERVER['PHP_SELF'];
 
-    try{
-        $db = new PDO('mysql:host='.DBHOST.';dbname='.DBNAME.";charset=utf8", DBUSER, DBPASSWORD);
-    }catch(Exception $e)
-    {
-        die('Erreur:'.$e->getMessage());
-    }
+        try {
+            $db = new PDO('mysql:host=' . DBHOST . ';dbname=' . DBNAME . ";charset=utf8", DBUSER, DBPASSWORD);
+        } catch (Exception $e) {
+            die('Erreur:' . $e->getMessage());
+        }
 
-    if(isset($_GET['del']) && is_scalar($_GET['del']) && is_numeric($_GET['del'])){
-        remove_list($_GET['del']);
-        redirect($base_url);
-    }elseif (isset($_GET['start']) && is_scalar($_GET['start']) && is_numeric($_GET['start'])){
-        start_list($path, $_GET['start']);
-    }
-    elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
-        $tri = $_GET['tri'];
-    } else {
-        $tri = "ID";
+        if (isset($_GET['del']) && is_scalar($_GET['del']) && is_numeric($_GET['del'])) {
+            remove_list($_GET['del']);
+            redirect($base_url);
+        } elseif (isset($_GET['start']) && is_scalar($_GET['start']) && is_numeric($_GET['start'])) {
+            start_list($path, $_GET['start']);
+        } elseif (isset($_GET['tri']) && is_scalar($_GET['tri']) && in_array($_GET['tri'], $colonnes)) {
+            $tri = $_GET['tri'];
+        } else {
+            $tri = "ID";
+        }
     }
     ?>
 <table>
     <tr>
         <?php
-        foreach($colonnes as $c) {
-            echo "<th>";
-            echo action_links($base_url, "tri", $c, $c);
-            echo "</th>";
+        //Ceci est sale, cependant le temps manque pour rendre propre ce test, veuillez nous pardonner
+        if(isset($_SESSION['user'])) {
+            foreach ($colonnes as $c) {
+                echo "<th>";
+                echo action_links($base_url, "tri", $c, $c);
+                echo "</th>";
+            }
+            echo " <th>Commencer</th>";
         }
         ?>
-        <th>Commencer</th>
+
     </tr>
     <?php
-    if($question_list = get_questionSideBar($tri)){
-        while($row = $question_list->fetch(PDO::FETCH_ASSOC)){
-            echo "<tr>"
-                .balisage(array_map("htmlentities", $row))
-                ."<td>".action_links($base_url, "start", $row['ID_list'], "Start")."</td>"
-                ."</tr>";
+    //Ceci est sale, cependant le temps manque pour rendre propre ce test
+    if(isset($_SESSION['user'])) {
+        if ($question_list = get_questionSideBar($tri)) {
+            while ($row = $question_list->fetch(PDO::FETCH_ASSOC)) {
+                echo "<tr>"
+                    . balisage(array_map("htmlentities", $row))
+                    . "<td>" . action_links($base_url, "start", $row['ID_list'], "Start") . "</td>"
+                    . "</tr>";
+            }
         }
     }
     ?>

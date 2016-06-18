@@ -30,12 +30,9 @@ function requete($pdo){
 	$reqcopy = $req;
 
 	//On regarde si on a un mot en maitrise négative
-	if($req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'],':levelmin' => -666, ':levelmax' => 0, ':last_answer' => 2))){
-		echo "OK";
-	}
+	$req->execute(array(':list' => $_SESSION['id'], ':user' => $_SESSION['ID_User'],':levelmin' => -666, ':levelmax' => 0, ':last_answer' => 2));
 	//Si il y en a pas, on choisit aléatoirement un autre mot
 	while(!$res = $req->fetch(PDO::FETCH_ASSOC)){
-		echo "IN";
 		$req = $reqcopy;
 		$alea = rand(1, 20);
 		//Dernier faux
@@ -131,7 +128,6 @@ function validateAnswer($pdo){
 	}
 }
 if(isset($_POST['send'])){
-	echo 'Réponse envoyé';
 	validateAnswer($pdo);
 }
 displayQuest($pdo);
