@@ -21,8 +21,8 @@ class Auth_DB extends Auth_Abstract{
             $_SESSION['user'] = $user['username'];
             $_SESSION['ID_User'] = $user['ID_User'];
 
-            header('Location: ../index.php');
-            exit;
+
+            return true;
         }
     }
 

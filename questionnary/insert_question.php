@@ -1,7 +1,5 @@
 ﻿<?php
 
-//Ajouter précision  liste
-
 require_once '../admin/config-db.php';
 require_once '../admin/open-db.php';
 require_once '../compte/function_compte.php';
@@ -89,7 +87,6 @@ else{
                 echo "<tr>"
                     .balisage(array_map("htmlentities", $donnees))
                     ."<td>".action_links("edit_question.php", "ID_Question", $donnees['ID_Question'], "Modifier")."</td>"
-                    //."<td>".action_links($_SERVER['PHP_SELF'], "Supprimer", $row['ID_list'], "X")."</td>"
                     ."</tr>";
             }
             echo '</table>';

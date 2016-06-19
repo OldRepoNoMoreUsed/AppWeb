@@ -10,11 +10,7 @@ require_once '../admin/open-db.php';
 $req = $pdo->prepare("INSERT INTO tb_list (list_name, list_description, list_commentary, list_difficulty, list_owner_user) VALUES (?, ?, ?, ?, ?)");
 
 
-if($req->execute(array($_POST["list_name"], $_POST["list_description"], $_POST["list_commentary"], $_POST["list_difficulty"], $_SESSION['ID_User']))){
-	header('Location: insert_question.php?ID_list='.$pdo->lastInsertId());
-}
-else{
-	echo "pas super!";
-}
+$req->execute(array($_POST["list_name"], $_POST["list_description"], $_POST["list_commentary"], $_POST["list_difficulty"], $_SESSION['ID_User']));
+header('Location: insert_question.php?ID_list='.$pdo->lastInsertId());
 
 ?>

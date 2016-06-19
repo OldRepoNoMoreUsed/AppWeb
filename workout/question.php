@@ -104,7 +104,6 @@ function validateAnswer($pdo){
 			$pdo->exec('UPDATE tb_masteries SET level = level + 1, last_answer = 1 WHERE user_ID_Utilisateur ='.$_SESSION['ID_User'].' AND question_ID_Question = '.$_SESSION['ID_Question']);
 		}
 
-		//$req = $pdo->prepare("INSERT INTO tb_masteries (last_answer, level, list_commentary, list_difficulty, list_owner_user) VALUES (?, ?, ?, ?, ?)");
 	}
 	else{
 		echo '<p>Mauvaise réponse !</p>';
