@@ -55,12 +55,23 @@ function requete($pdo){
     <meta charset="utf-8">
     <title>Questionneur</title>
 	<link rel="stylesheet" href="../css/page.css" />
-    <script src="script.js"></script>
 </head>
 <body>
 <div id="haut">
 	<?php require_once('../bar/menu.php') ?>
 </div>
+<div id="global">
+	<div id="centre" align="center">
+		<?php
+		if(isset($_POST['send'])){
+			validateAnswer($pdo);
+		}
+		displayQuest($pdo);
+		?>
+	</div>
+</div>
+
+
 
 <?php require_once('../bar/footer.php')?>
 
@@ -115,10 +126,7 @@ function validateAnswer($pdo){
 		}
 	}
 }
-if(isset($_POST['send'])){
-	validateAnswer($pdo);
-}
-displayQuest($pdo);
+
 
 ?>
 

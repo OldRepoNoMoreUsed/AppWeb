@@ -11,7 +11,13 @@ $req = $pdo->prepare("UPDATE tb_question SET Question=?, Answer=? WHERE ID_Quest
 
 $req->execute(array($_POST['question'], $_POST['answer'], $_SESSION['ID_Question_edit']));
 
-redirect("insert_question.php?ID_list=".$_SESSION['list']);
+if(isset($_SESSION['list'])){
+    redirect("insert_question.php?ID_list=".$_SESSION['list']);
+}
+else{
+    redirect("insert_question.php");
+}
+
 
 
 

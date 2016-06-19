@@ -35,7 +35,7 @@ function remove_list($id){
 
 function start_list($path, $id){
     echo "On lance une session d entrainement avec la liste: ". $id;
-    redirect("Location: ".$path."/workout/question.php?id=".$id);
+    redirect($path."/workout/question.php?id=".$id);
 }
 
 function redirect($url){
@@ -44,7 +44,13 @@ function redirect($url){
 }
 
 function validated($tab, $elem, $func){
-    return (isset($tab[$elem[0]]) && is_scalar(isset($tab[$elem[0]])) && call_user_func($func, $tab[$elem[0]], $elem[1]));
+    if(count($elem) < 2){
+        return (isset($tab[$elem[0]]) && is_scalar(isset($tab[$elem[0]])) && call_user_func($func, $tab[$elem[0]]));
+    }
+    else{
+        return (isset($tab[$elem[0]]) && is_scalar(isset($tab[$elem[0]])) && call_user_func($func, $tab[$elem[0]], $elem[1]));
+    }
+
 }
 
 

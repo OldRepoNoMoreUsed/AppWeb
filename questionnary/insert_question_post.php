@@ -12,6 +12,8 @@
 require_once '../admin/config-db.php';
 require_once '../admin/open-db.php';
 
+$_SESSION['list'] =$_POST['list'];
+
 ?>
 
 

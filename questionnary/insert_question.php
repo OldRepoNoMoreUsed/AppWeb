@@ -7,9 +7,11 @@ require_once '../compte/function_compte.php';
 if(isset($_GET['ID_list'])){
     $_SESSION['list']=$_GET['ID_list'];
 }
-else{
-    $_SESSION['list']="";
+
+if(!isset($_SESSION['ID_User'])){
+    redirect("../index.php");
 }
+
 
 
 ?>
