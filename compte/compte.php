@@ -57,7 +57,7 @@ elseif(validated($_GET, array('tri', $colonnes), "in_array")){
     <div id="centre" align="center">
 
         <h2>Mon compte</h2>
-        <p><a href="questionnary/insert-list.php">Ajouter un questionnaire</a></p>
+        <p><a href="../questionnary/insert-list.php">Ajouter un questionnaire</a></p>
 
         <h2>Liste des questionnaires lié a ce compte</h2>
         <table border="1">
